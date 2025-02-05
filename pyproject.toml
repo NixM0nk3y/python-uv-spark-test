@@ -1,0 +1,51 @@
+[project]
+name = "sqltest"
+version = "0.1.0"
+description = "Sample UV Test"
+readme = "README.md"
+authors = [
+    { name = "Nick Gregory", email = "nick.gregory@openenterprise.co.uk" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "pyspark-test>=0.2.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+pythonpath = "src"
+addopts = "-s -p no:warnings"
+log_cli = 1
+log_cli_level = "INFO"
+log_cli_format = "[pytest][%(asctime)s][%(levelname)s][%(module)s][%(funcName)s] %(message)s"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
+log_level = "INFO"
+
+[tool.pytest.ini_options.spark_options]
+"spark.sql.session.timeZone" = "UTC"
+"spark.executor.id" = "driver"
+"spark.app.name" = "PySparkShell"
+"spark.executor.instances" = 1
+"master" = "local[*]"
+"spark.sql.catalogImplementation" = "in-memory"
+
+[tool.black]
+line-length = 140
+target-version = ['py310']
+include = '\.pyi?$'
+
+[tool.pylint]
+max-line-length = 140
+additional-builtins = 'spark, dbutils'
+disable = [
+    "W0105", # (pointless-string-statement)
+    "E1101", # (no-member)
+    "W1203", # (logging-fstring-interpolation)
+    "C0114", # (missing-module-docstring)
+    "C0115", # (missing-class-docstring)
+    "C0116", # (missing-function-docstring)
+]
