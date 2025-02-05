@@ -24,14 +24,15 @@ log_cli_level = "INFO"
 log_cli_format = "[pytest][%(asctime)s][%(levelname)s][%(module)s][%(funcName)s] %(message)s"
 log_cli_date_format = "%Y-%m-%d %H:%M:%S"
 log_level = "INFO"
+markers = ["spark"]
 
 [tool.pytest.ini_options.spark_options]
-"spark.sql.session.timeZone" = "UTC"
-"spark.executor.id" = "driver"
-"spark.app.name" = "PySparkShell"
-"spark.executor.instances" = 1
-"master" = "local[*]"
-"spark.sql.catalogImplementation" = "in-memory"
+spark.sql.session.timeZone = "UTC"
+spark.executor.id = "driver"
+spark.app.name = "PySparkShell"
+spark.executor.instances = 1
+master = "local[*]"
+spark.sql.catalogImplementation = "in-memory"
 
 [tool.black]
 line-length = 140
